@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //If you create a SerializeField, it appears in the Unity UI to be altered there, if needed :)
     [SerializeField] Transform playerCamera = null;
-    [SerializeField] float mouseSensitivity = 50f;
+    [SerializeField] float mouseSensitivity = 3.5f;
     [SerializeField] bool lockCursor = true;
-    [SerializeField] float walkSpeed = 10.0f;
-
-    CharacterController controller = null;
+    [SerializeField] float walkSpeed = 6.0f;
+    [SerializeField] float jumpSpeed = 5.0f;
+    [SerializeField] float gravityAcc = -9.81f;
 
     float cameraPitch = 0.0f;
-    float gravityAcc = -9.8f;
+    float velocityY;
+
+    CharacterController controller = null;
+    
     // Start is called before the first frame update
     void Start()
     {
+        velocityY = 0.0f;
         controller = GetComponent<CharacterController>();
         if (lockCursor)
         {
@@ -41,13 +46,26 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(Vector3.up * mouseDelta.x * mouseSensitivity);
     }
 
-    // Update for the player's movement using WASD
+    // Update for the player's movement using WASD and jump using space bar
     void UpdateMovement()
     {
         Vector2 inputDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         inputDir.Normalize();
         Vector3 movementVelocity = (transform.forward * inputDir.y + transform.right * inputDir.x) * walkSpeed;
-        movementVelocity.y += gravityAcc;
+        //Only allows the user to jump if it is grounded
+        if (controller.isGrounded)
+        {
+            velocityY = 0;
+            if (Input.GetKeyDown("space"))
+            {
+                velocityY += jumpSpeed;
+            }
+        }else
+        {
+            velocityY += gravityAcc * Time.deltaTime;
+        }
+        movementVelocity.y = velocityY;
         controller.Move(movementVelocity * Time.deltaTime);
     }
+
 }
