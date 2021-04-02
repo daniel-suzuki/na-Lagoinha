@@ -25,7 +25,7 @@ public class GenerateNPCs : MonoBehaviour
         {
             xPosition = Random.Range(targetXPositionBeginning, targetXPositionEnd);
             zPosition = Random.Range(targetZPositionBeginning, targetZPositionEnd);
-            Instantiate(NPCs[0], new Vector3(xPosition, 20, zPosition), Quaternion.identity);
+            Instantiate(NPCs[Random.Range(0, NPCs.Count)], new Vector3(xPosition, 20, zPosition), Quaternion.identity);
             yield return new WaitForSeconds(0.1f);
             countOfNPCs += 1;
         }
