@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     CharacterController controller = null;
 
     float cameraPitch = 0.0f;
+    float gravityAcc = -9.8f;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +46,9 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 inputDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         inputDir.Normalize();
-        Vector3 velocity = (transform.forward * inputDir.y + transform.right * inputDir.x) * walkSpeed;
-        controller.Move(velocity * Time.deltaTime);
+        Vector3 movementVelocity = (transform.forward * inputDir.y + transform.right * inputDir.x) * walkSpeed;
+        movementVelocity.y += gravityAcc;
+        controller.Move(movementVelocity * Time.deltaTime);
     }
+
 }
