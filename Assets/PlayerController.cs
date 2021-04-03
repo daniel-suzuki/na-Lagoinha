@@ -34,6 +34,10 @@ public class PlayerController : MonoBehaviour
     {
         UpdateMouseLook();
         UpdateMovement();
+
+        Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
+        Debug.DrawRay(transform.position, forward, Color.green);
+
     }
 
     // Update of Mouse Look logic (Changing Pitch of the Camera)
