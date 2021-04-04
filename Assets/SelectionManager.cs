@@ -16,10 +16,11 @@ public class SelectionManager : MonoBehaviour
     [SerializeField] Text scoreExtraText;
 
     // for the pop ups when you finish the game
+    /*
     [SerializeField] TMP_Text popupText;
     [SerializeField] GameObject popUpBox;
     [SerializeField] Animator animator;
-
+    */
 
     HashSet<string> extrasFound = new HashSet<string>();
 
@@ -99,8 +100,10 @@ public class SelectionManager : MonoBehaviour
 
     // should activate - suzuki corno
     void Activate(string text){
+        /*
         popUpBox.SetActive(true);
         popUpText.text = text;
         animator.SetTrigger("pop");
+        */
     }
 }
