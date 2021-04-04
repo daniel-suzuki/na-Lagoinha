@@ -9,6 +9,10 @@ public class NPCController : MonoBehaviour
     [SerializeField] float gravityAcc = -9.81f;
     float velocityY;
     CharacterController controller = null;
+
+    // Bool for animations
+    private Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +28,19 @@ public class NPCController : MonoBehaviour
 
     void UpdateNPCMovement()
     {
+        // vector for the velocity
+        Vector2 inputDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        inputDir.Normalize();
+
+        // update bool to change animation
+        if (inputDir.magnitude > 1)
+        {
+            anim.SetBool("isRunning", true);
+        } else
+        {
+            anim.SetBool("isRunning", false);
+        }
+
         //Only allows the user to jump if it is grounded
         Vector3 movementVelocity = new Vector3(0.0f, 0.0f, 0.0f);
         if (controller.isGrounded)

@@ -16,7 +16,10 @@ public class PlayerController : MonoBehaviour
     float velocityY;
 
     CharacterController controller = null;
-    
+
+    // Bool for animations
+    private Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +59,15 @@ public class PlayerController : MonoBehaviour
         Vector2 inputDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         inputDir.Normalize();
         Vector3 movementVelocity = (transform.forward * inputDir.y + transform.right * inputDir.x) * walkSpeed;
+
+        // update bool to change animation
+        if (inputDir.magnitude > 1)
+        {
+            anim.SetBool("isRunning", true);
+        } else {
+            anim.SetBool("isRunning", false);
+        }
+
         //Only allows the user to jump if it is grounded
         if (controller.isGrounded)
         {
