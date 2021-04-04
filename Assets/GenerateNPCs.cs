@@ -16,17 +16,17 @@ public class GenerateNPCs : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(NPCDrop());
+        NPCDrop();
     }
 
-    IEnumerator NPCDrop()
+    void NPCDrop()
     {
         while(countOfNPCs < targetCountOfNPCs)
         {
             xPosition = Random.Range(targetXPositionBeginning, targetXPositionEnd);
             zPosition = Random.Range(targetZPositionBeginning, targetZPositionEnd);
-            Instantiate(NPCs[Random.Range(0, NPCs.Count)], new Vector3(xPosition, 20, zPosition), Quaternion.identity);
-            yield return new WaitForSeconds(0.1f);
+            Instantiate(NPCs[Random.Range(0, NPCs.Count)], new Vector3(xPosition, 440, zPosition), Quaternion.identity);
+            //yield return new WaitForSeconds(0.1f);
             countOfNPCs += 1;
         }
     }
