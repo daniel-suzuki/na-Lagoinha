@@ -10,6 +10,9 @@ public class GenerateNPCs : MonoBehaviour
     [SerializeField] float targetZPositionBeginning;
     [SerializeField] float targetZPositionEnd;
     [SerializeField] int targetCountOfNPCs;
+    [SerializeField] List<Texture2D> skins;
+
+    
     float xPosition;
     float zPosition;
     int countOfNPCs;
@@ -21,11 +24,16 @@ public class GenerateNPCs : MonoBehaviour
 
     void NPCDrop()
     {
+
+        
+
         while(countOfNPCs < targetCountOfNPCs)
         {
             xPosition = Random.Range(targetXPositionBeginning, targetXPositionEnd);
             zPosition = Random.Range(targetZPositionBeginning, targetZPositionEnd);
-            Instantiate(NPCs[Random.Range(0, NPCs.Count)], new Vector3(xPosition, 440, zPosition), Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)));
+            GameObject t;
+            t =  (GameObject) Instantiate(NPCs[0], new Vector3(xPosition, 350, zPosition), Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)));
+            t.transform.GetChild(0).GetComponent<Renderer>().material.mainTexture = skins[Random.Range(0,skins.Count)];
             //yield return new WaitForSeconds(0.1f);
             countOfNPCs += 1;
         }

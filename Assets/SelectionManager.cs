@@ -20,9 +20,11 @@ public class SelectionManager : MonoBehaviour
     [SerializeField] Text timer2;
     [SerializeField] Text scoreWallyText2;
     [SerializeField] Text scoreExtraText2;
+    [SerializeField] Text record;
 
 
     [SerializeField] GameObject gamePanel;
+    [SerializeField] GameObject mainMenu;
 
     // for the pop ups when you finish the game
     /*
@@ -35,6 +37,7 @@ public class SelectionManager : MonoBehaviour
 
     private Transform _selection;
     public bool wallyFound = false;
+    public bool gameStarted = false;
 
     float time = 0f;
 
@@ -51,88 +54,113 @@ public class SelectionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_selection != null) {
-            var selectionRenderer = _selection.GetComponent<Renderer>();
-            selectionRenderer.material = defaultMaterial;
-            _selection = null;
+        if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                Application.Quit();
+                }
+        if (!gameStarted) {
+            if(Input.anyKey) {
+                mainMenu.SetActive(false);
+                gameStarted = true;
+            }
         }
+        else {
+            if (_selection != null) {
+                var selectionRenderer = _selection.GetComponent<Renderer>();
+                selectionRenderer.material = defaultMaterial;
+                _selection = null;
+            }
 
-        // Update Timer 
+            // Update Timer 
 
+            
+            if (!wallyFound) {
+                time += Time.deltaTime;
+                timer.text = string.Format("{0:0.00}", time);
+            }
+
+
+            var ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit) && Input.GetMouseButtonDown(0)) {
+                var selection = hit.transform;
+                if (selection.CompareTag(wallyTag)) {
+                    var selectionRenderer = selection.GetComponent<Renderer>();
         
-        if (!wallyFound) {
-            time += Time.deltaTime;
-            timer.text = string.Format("{0:0.00}", time);
-        }
+                    // If wally was not found yet and we want to press it
+                    if (!wallyFound) {
+                        wallyFound = true;
+                        timer2.text = string.Format("{0:0.00}", time);
+                        float rec = -1f;
+                        if(PlayerPrefs.HasKey("record")) {
+                            rec = PlayerPrefs.GetFloat("record");
+                        }
+
+                        if (rec == -1f || time < rec) {
+                            PlayerPrefs.SetFloat("record", time);
+                            rec = time;
+                        }
+                        if (rec == time) {
+                            record.text = string.Format("{0:0.00}", rec) + " - Novo Recorde!";
+                        } else
+                        {
+                            record.text = string.Format("{0:0.00}", rec);
+                        }
+                        timer2.text = string.Format("{0:0.00}", time);
+
+                        // scoreWallyText.text = "Ache o Wally";
+                        scoreWallyText.color = Color.gray;
+                        scoreWallyText2.color = Color.gray;
+                    } 
+                    
+                    // if (selectionRenderer != null) { 
+                    //     selectionRenderer.material = highlightMaterial;
+                    // }
+                    // _selection = selection;
+                }
 
 
-        var ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit) && Input.GetMouseButtonDown(0)) {
-            var selection = hit.transform;
-            if (selection.CompareTag(wallyTag)) {
-                var selectionRenderer = selection.GetComponent<Renderer>();
-     
-                // If wally was not found yet and we want to press it
-                if (!wallyFound) {
-                    wallyFound = true;
-                    timer2.text = string.Format("{0:0.00}", time);
-                    // scoreWallyText.text = "Ache o Wally";
-                    scoreWallyText.color = Color.gray;
-                    scoreWallyText2.color = Color.gray;
+                // Extra 1
+                if (selection.CompareTag("extra1")) {
+                    extrasFound.Add("extra1");
+                }
+                if (selection.CompareTag("extra2")) {
+                    extrasFound.Add("extra2");
+                }
+                if (selection.CompareTag("extra3")) {
+                    extrasFound.Add("extra3");
+                }
+
+                string finalExtraScore = "Ache os zumbis e o ciborgue (" + extrasFound.Count.ToString() + "/3)";
+                scoreExtraText.text = finalExtraScore;
+                scoreExtraText2.text = finalExtraScore;
+                if (extrasFound.Count == 3) {
+                        scoreExtraText.color = Color.gray;
+                        scoreExtraText2.color = Color.gray;
                 } 
-                
-                // if (selectionRenderer != null) { 
-                //     selectionRenderer.material = highlightMaterial;
-                // }
-                // _selection = selection;
+
+
             }
 
+            // if (Input.GetMouseButtonDown(1)) {
+            //     Restart();
+            // }
 
-            // Extra 1
-            if (selection.CompareTag("extra1")) {
-                extrasFound.Add("extra1");
+            // must find all the characters and endgame should be false
+            if(wallyFound && !endGame){
+                Activate();
             }
-            if (selection.CompareTag("extra2")) {
-                extrasFound.Add("extra2");
+            
+            if (endGame)
+            {
+                if (Input.GetKeyDown("q"))
+                {
+                    Restart();
+                }
+
             }
-            if (selection.CompareTag("extra3")) {
-                extrasFound.Add("extra3");
-            }
-
-            string finalExtraScore = "Ache os zumbis e o ciborgue (" + extrasFound.Count.ToString() + "/3)";
-            scoreExtraText.text = finalExtraScore;
-            scoreExtraText2.text = finalExtraScore;
-            if (extrasFound.Count == 3) {
-                    scoreExtraText.color = Color.gray;
-                    scoreExtraText2.color = Color.gray;
-            } 
-
-
-        }
-
-        if (Input.GetMouseButtonDown(1)) {
-            Restart();
-        }
-
-        // must find all the characters and endgame should be false
-        if(wallyFound && !endGame){
-            Activate();
         }
         
-        if (endGame)
-        {
-            if (Input.GetKeyDown("r"))
-            {
-                Restart();
-            }
-
-            if (Input.GetKeyDown("q"))
-            {
-               Application.Quit();
-            }
-
-        }
 
     }
 
