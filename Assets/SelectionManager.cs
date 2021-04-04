@@ -13,6 +13,7 @@ public class SelectionManager : MonoBehaviour
     [SerializeField] Material defaultMaterial;
     [SerializeField] Text scoreWallyText;
     [SerializeField] Text scoreExtraText;
+    [SerializeField] GameObject endGamePopUp;
 
     // for the pop ups when you finish the game
     /*
@@ -27,10 +28,14 @@ public class SelectionManager : MonoBehaviour
     public bool wallyFound = false;
 
 
+    // bool for the endgame popUp
+    public bool endGame = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
@@ -87,9 +92,25 @@ public class SelectionManager : MonoBehaviour
             Restart();
         }
 
-        if(extrasFound.Count == 3 && wallyFound){
-            Activate("você acabou o jogo!");
+        // must find all the characters and endgame should be false
+        if(extrasFound.Count == 3 && wallyFound && !endGame){
+            Activate();
         }
+        
+        if (endGame)
+        {
+            if (Input.GetKeyDown("r"))
+            {
+                Restart();
+            }
+
+            if (Input.GetKeyDown("q"))
+            {
+               Application.Quit();
+            }
+
+        }
+
     }
 
     // Put this somwhere else
@@ -98,11 +119,11 @@ public class SelectionManager : MonoBehaviour
     }
 
     // should activate - suzuki corno
-    void Activate(string text){
-        /*
-        popUpBox.SetActive(true);
-        popUpText.text = text;
-        animator.SetTrigger("pop");
-        */
+    void Activate(){
+
+        endGamePopUp.SetActive(true);
+
+        endGame = true;
+
     }
 }

@@ -8,6 +8,7 @@ TagManager:
   - extra1
   - extra2
   - extra3
+  - popupendgame
   layers:
   - Default
   - TransparentFX
