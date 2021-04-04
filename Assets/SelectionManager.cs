@@ -11,9 +11,18 @@ public class SelectionManager : MonoBehaviour
     [SerializeField] Camera playerCamera = null;
     [SerializeField] string wallyTag = "wally";
     [SerializeField] Material defaultMaterial;
+    
+    [SerializeField] GameObject endGamePopUp;
+    [SerializeField] Text timer;
     [SerializeField] Text scoreWallyText;
     [SerializeField] Text scoreExtraText;
-    [SerializeField] GameObject endGamePopUp;
+
+    [SerializeField] Text timer2;
+    [SerializeField] Text scoreWallyText2;
+    [SerializeField] Text scoreExtraText2;
+
+
+    [SerializeField] GameObject gamePanel;
 
     // for the pop ups when you finish the game
     /*
@@ -27,6 +36,7 @@ public class SelectionManager : MonoBehaviour
     private Transform _selection;
     public bool wallyFound = false;
 
+    float time = 0f;
 
     // bool for the endgame popUp
     public bool endGame = false;
@@ -47,6 +57,15 @@ public class SelectionManager : MonoBehaviour
             _selection = null;
         }
 
+        // Update Timer 
+
+        
+        if (!wallyFound) {
+            time += Time.deltaTime;
+            timer.text = string.Format("{0:0.00}", time);
+        }
+
+
         var ray = playerCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit) && Input.GetMouseButtonDown(0)) {
@@ -57,8 +76,10 @@ public class SelectionManager : MonoBehaviour
                 // If wally was not found yet and we want to press it
                 if (!wallyFound) {
                     wallyFound = true;
-                    scoreWallyText.text = "Ache o Wally (1/1)";
+                    timer2.text = string.Format("{0:0.00}", time);
+                    // scoreWallyText.text = "Ache o Wally";
                     scoreWallyText.color = Color.gray;
+                    scoreWallyText2.color = Color.gray;
                 } 
                 
                 // if (selectionRenderer != null) { 
@@ -79,10 +100,12 @@ public class SelectionManager : MonoBehaviour
                 extrasFound.Add("extra3");
             }
 
-            string finalExtraScore = "Ache os cachorros (" + extrasFound.Count.ToString() + "/3)";
+            string finalExtraScore = "Ache os zumbis e o ciborgue (" + extrasFound.Count.ToString() + "/3)";
             scoreExtraText.text = finalExtraScore;
+            scoreExtraText2.text = finalExtraScore;
             if (extrasFound.Count == 3) {
                     scoreExtraText.color = Color.gray;
+                    scoreExtraText2.color = Color.gray;
             } 
 
 
@@ -93,7 +116,7 @@ public class SelectionManager : MonoBehaviour
         }
 
         // must find all the characters and endgame should be false
-        if(extrasFound.Count == 3 && wallyFound && !endGame){
+        if(wallyFound && !endGame){
             Activate();
         }
         
@@ -122,6 +145,7 @@ public class SelectionManager : MonoBehaviour
     void Activate(){
 
         endGamePopUp.SetActive(true);
+        gamePanel.SetActive(false);
 
         endGame = true;
 
