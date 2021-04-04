@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 
 public class SelectionManager : MonoBehaviour
@@ -13,6 +14,11 @@ public class SelectionManager : MonoBehaviour
     [SerializeField] Material defaultMaterial;
     [SerializeField] Text scoreWallyText;
     [SerializeField] Text scoreExtraText;
+
+    // for the pop ups when you finish the game
+    [SerializeField] TMP_Text popupText;
+    [SerializeField] GameObject popUpBox;
+    [SerializeField] Animator animator;
 
 
     HashSet<string> extrasFound = new HashSet<string>();
@@ -80,10 +86,21 @@ public class SelectionManager : MonoBehaviour
         if (Input.GetMouseButtonDown(1)) {
             Restart();
         }
+
+        if(extrasFound.Count == 3 && wallyFound){
+            Activate("você acabou o jogo!");
+        }
     }
 
     // Put this somwhere else
     void Restart() {
         SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex );
+    }
+
+    // should activate - suzuki corno
+    void Activate(string text){
+        popUpBox.SetActive(true);
+        popUpText.text = text;
+        animator.SetTrigger("pop");
     }
 }

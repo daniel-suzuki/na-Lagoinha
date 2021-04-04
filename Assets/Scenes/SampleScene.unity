@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -218,13 +218,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada8e4076577d13418f9e4c516dbcadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightMaterial: {fileID: 2100000, guid: cb7fadaa21e3e4b4f86f48a42f1650db, type: 2}
-  playerCamera: {fileID: 1104824242}
-  wallyTag: wally
-  defaultMaterial: {fileID: 2100000, guid: 15d4314fec630d94594493bc303e6bcd, type: 2}
-  scoreWallyText: {fileID: 1541643416}
-  scoreExtraText: {fileID: 1567789978}
-  wallyFound: 0
 --- !u!4 &109067883
 Transform:
   m_ObjectHideFlags: 0
@@ -563,11 +556,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ebafeed6bd6a1d04d95a7854d023513f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.42
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ebafeed6bd6a1d04d95a7854d023513f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.19
+      value: 11.97
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ebafeed6bd6a1d04d95a7854d023513f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -596,6 +589,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ebafeed6bd6a1d04d95a7854d023513f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2198888584636164399, guid: ebafeed6bd6a1d04d95a7854d023513f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.04
       objectReference: {fileID: 0}
     - target: {fileID: -2049929814205202405, guid: ebafeed6bd6a1d04d95a7854d023513f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -814,7 +811,7 @@ MonoBehaviour:
   targetXPositionEnd: 10
   targetZPositionBeginning: -10
   targetZPositionEnd: 10
-  targetCountOfNPCs: 10
+  targetCountOfNPCs: 5
 --- !u!4 &696256012
 Transform:
   m_ObjectHideFlags: 0
@@ -1024,6 +1021,12 @@ MonoBehaviour:
   walkSpeed: 6
   jumpSpeed: 5
   gravityAcc: -9.81
+  anim: {fileID: 957933989}
+--- !u!95 &957933989 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: ebafeed6bd6a1d04d95a7854d023513f, type: 3}
+  m_PrefabInstance: {fileID: 413797912}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &957933990 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ebafeed6bd6a1d04d95a7854d023513f, type: 3}
@@ -1064,7 +1067,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ebafeed6bd6a1d04d95a7854d023513f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.03
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ebafeed6bd6a1d04d95a7854d023513f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1097,6 +1100,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ebafeed6bd6a1d04d95a7854d023513f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2198888584636164399, guid: ebafeed6bd6a1d04d95a7854d023513f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -2049929814205202405, guid: ebafeed6bd6a1d04d95a7854d023513f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1308,8 +1315,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42dbba6912be5894ebdf0d3f0014dd0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 6
-  jumpSpeed: 5
   gravityAcc: -9.81
 --- !u!143 &1382856662
 CharacterController:
@@ -1576,7 +1581,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1572712638}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.27, y: 0.84, z: -2.53}
+  m_LocalPosition: {x: -5.27, y: 0.7, z: -2.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1599,7 +1604,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ebafeed6bd6a1d04d95a7854d023513f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.12
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ebafeed6bd6a1d04d95a7854d023513f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1632,6 +1637,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ebafeed6bd6a1d04d95a7854d023513f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2198888584636164399, guid: ebafeed6bd6a1d04d95a7854d023513f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.9
       objectReference: {fileID: 0}
     - target: {fileID: -2049929814205202405, guid: ebafeed6bd6a1d04d95a7854d023513f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1815,8 +1824,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42dbba6912be5894ebdf0d3f0014dd0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 6
-  jumpSpeed: 5
   gravityAcc: -9.81
 --- !u!143 &1920966385
 CharacterController:

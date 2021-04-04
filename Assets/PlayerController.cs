@@ -11,14 +11,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float walkSpeed = 6.0f;
     [SerializeField] float jumpSpeed = 5.0f;
     [SerializeField] float gravityAcc = -9.81f;
+    [SerializeField] Animator anim;
 
     float cameraPitch = 0.0f;
     float velocityY;
 
     CharacterController controller = null;
 
-    // Bool for animations
-    private Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -59,9 +58,8 @@ public class PlayerController : MonoBehaviour
         Vector2 inputDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         inputDir.Normalize();
         Vector3 movementVelocity = (transform.forward * inputDir.y + transform.right * inputDir.x) * walkSpeed;
-
         // update bool to change animation
-        if (inputDir.magnitude > 1)
+        if (inputDir.magnitude > 0.0f)
         {
             anim.SetBool("isRunning", true);
         } else {
