@@ -76,7 +76,7 @@ public class SelectionManager : MonoBehaviour
             
             if (!wallyFound) {
                 time += Time.deltaTime;
-                timer.text = string.Format("{0:0.00}", time);
+                timer.text = string.Format("{0:0.00} s", time);
             }
 
 
@@ -90,7 +90,7 @@ public class SelectionManager : MonoBehaviour
                     // If wally was not found yet and we want to press it
                     if (!wallyFound) {
                         wallyFound = true;
-                        timer2.text = string.Format("{0:0.00}", time);
+                        timer2.text = string.Format("{0:0.00} s", time);
                         float rec = -1f;
                         if(PlayerPrefs.HasKey("record")) {
                             rec = PlayerPrefs.GetFloat("record");
@@ -101,12 +101,12 @@ public class SelectionManager : MonoBehaviour
                             rec = time;
                         }
                         if (rec == time) {
-                            record.text = string.Format("{0:0.00}", rec) + " - Novo Recorde!";
+                            record.text = string.Format("{0:0.00} s", rec) + " - Novo Recorde!";
                         } else
                         {
-                            record.text = string.Format("{0:0.00}", rec);
+                            record.text = string.Format("{0:0.00} s", rec);
                         }
-                        timer2.text = string.Format("{0:0.00}", time);
+                        timer2.text = string.Format("{0:0.00} s", time);
 
                         // scoreWallyText.text = "Ache o Wally";
                         scoreWallyText.color = Color.gray;
