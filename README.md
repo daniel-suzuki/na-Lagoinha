@@ -3,7 +3,7 @@
 O jogo 'Na Lagoinha' é uma recriação do 'Onde está o Wally?', uma série de livros de entretenimento lançada no ano de 1987. As revistas originais contam com mais de 70 milhões de cópias vendidas em mais de 50 países. Com essa inspiração em mente, o time decidiu reinventar o jogo adicionando uma experiência mais imersiva e digital.
 
 ## Time
-- Arthur Freitas (UX/UI), estudante de engenharia mecânica na University of Texas at Austin
+- Arthur Freitas (UX/UI), estudante de engenharia mecânica na The University of Texas at Austin
 - Daniel Suzuki (Programação), estudante de engenharia elétrica na Tel Aviv University
 - Danilo Correa (Programação), estudante de ciência da computação na Worcester Polytechnic Institue
 - Diego Zancaneli (Business), estudante de economia na Stanford University
