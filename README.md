@@ -7,7 +7,7 @@ O jogo 'Na Lagoinha' é uma recriação do 'Onde está o Wally?', uma série de 
 - Daniel Suzuki (Programação), estudante de engenharia elétrica na Tel Aviv University
 - Danilo Correa (Programação), estudante de ciência da computação na Worcester Polytechnic Institue
 - Diego Zancaneli (Business), estudante de economia na Stanford University
-- Eduardo Trunci (Programação), estudante de matemática e ciência da computação na Georgia Tech University
+- Eduardo Trunci (Programação), estudante de matemática e ciência da computação na Georgia Tech
 
 ## Como baixar
 1. Clonar o repositório para a pasta local desejada
